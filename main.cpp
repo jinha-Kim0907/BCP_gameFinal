@@ -169,7 +169,7 @@ void moveRight() {
 			showMessage("You are in fire!!");
 		}
 		printf("%d\n", count);
-		//printf("%d\n", isFire(leftCount, rightCount, upCount, downCount));
+		
 	}
 }
 void moveLeft() {
