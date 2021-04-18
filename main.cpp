@@ -72,7 +72,7 @@ void gameInit() {
 		fire[j] = i;
 		j++;
 	}
-	
+
 	box[35] = createObject("Images/blueBox.jpg", scene1, indexToX(35), indexToY(35), true);
 	scaleObject(box[35], 0.5f);
 	start = createObject("Images/yellow.png", scene1, x, y, true);
@@ -97,7 +97,7 @@ void game2Init() {
 	for (int i = 6; i <= 10; i++) {
 		setObjectImage(box[i], "Images/redBox.jpg");
 		fire[j] = i;
-		j++;        
+		j++;
 	}
 	for (int i = 19; i <= 23; i++) {
 		setObjectImage(box[i], "Images/redBox.jpg");
@@ -109,7 +109,7 @@ void game2Init() {
 		fire[j] = i;
 		j++;
 	}
-	
+
 	box[35] = createObject("Images/blueBox.jpg", scene2, indexToX(35), indexToY(35), true);
 	scaleObject(box[35], 0.5f);
 	start = createObject("Images/yellow.png", scene2, x, y, true);
@@ -135,7 +135,7 @@ void game3Init() {
 		fire[j] = i;
 		j++;
 	}
-	for (int i = 18; i <= 30; i+=6) {
+	for (int i = 18; i <= 30; i += 6) {
 		setObjectImage(box[i], "Images/redBox.jpg");
 		fire[j] = i;
 		j++;
@@ -167,7 +167,7 @@ void game4Init() {
 		coord[i] = i;
 	}
 	int j = 0;
-	for (int i = 6; i <= 10; i+=2) {
+	for (int i = 6; i <= 10; i += 2) {
 		setObjectImage(box[i], "Images/redBox.jpg");
 		fire[j] = i;
 		j++;
@@ -247,16 +247,17 @@ void moveRight() {
 		count++;
 		sum++;
 		if (isFire(leftCount, rightCount, upCount, downCount)) {
-			stopSound(move);
+			
 			enterScene(startScene);
 			hideObject(startBtn);
 			showObject(end);
+			playSound(fail);
 			timeEnd = clock();
 			sprintf(sec, "You are in fire!! Time : %.0lfsec Count : %d  ToTal : %d", (double)(timeEnd - timeStart) / CLOCKS_PER_SEC, count, sum);
-			playSound(fail);
+			showMessage(sec);
 		}
 		printf("%d\n", count);
-		
+
 	}
 }
 void moveLeft() {
@@ -305,6 +306,7 @@ void moveUp() {
 			playSound(fail);
 			timeEnd = clock();
 			sprintf(sec, "You are in fire!! Time : %.0lfsec Count : %d  ToTal : %d", (double)(timeEnd - timeStart) / CLOCKS_PER_SEC, count, sum);
+			showMessage(sec);
 		}
 		printf("%d\n", count);
 	}
@@ -363,7 +365,7 @@ void mouseCallback(ObjectID object, int x, int y, MouseAction action) {
 
 void keyboardCallback(KeyCode code, KeyState state) {
 	if (!isDone) {
-	
+
 		if (isGameSuccess(leftCount, rightCount, upCount, downCount)) {
 			stopSound(move);
 			playSound(success);
@@ -413,6 +415,6 @@ int main() {
 	setKeyboardCallback(keyboardCallback);
 
 	gameInit();
-	
+
 	startGame(startScene);
 }
